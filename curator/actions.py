@@ -554,6 +554,7 @@ class CreateIndex(object):
         #: Instance variable.
         #: An :class:`elasticsearch.Elasticsearch` client object
         self.client = client
+        
         self.loggit = logging.getLogger('curator.actions.create_index')
 
     def do_dry_run(self):

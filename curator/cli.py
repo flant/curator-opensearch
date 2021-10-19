@@ -159,7 +159,6 @@ def run(config, action_file, dry_run=False):
         kwargs['master_timeout'] = (
             client_args['timeout'] if client_args['timeout'] <= 300 else 300)
         kwargs['dry_run'] = dry_run
-
         # Create a client object for each action...
         logger.info('Creating client object and testing connection')
         try:

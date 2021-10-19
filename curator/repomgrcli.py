@@ -176,7 +176,7 @@ def _delete(ctx, repository):
     try:
         logger.info('Deleting repository {0}...'.format(repository))
         client.snapshot.delete_repository(repository=repository)
-    except elasticsearch.NotFoundError:
+    except opensearchpy.NotFoundError:
         logger.error(
             'Unable to delete repository: {0}  Not Found.'.format(repository))
         sys.exit(1)

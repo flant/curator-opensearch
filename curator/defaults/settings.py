@@ -9,7 +9,7 @@ def version_max():
     return (7, 99, 99)
 def version_min():
     """Return the minimum Elasticsearch version Curator supports"""
-    return (5, 0, 0)
+    return (1, 0, 0)
 
 # Default Config file location
 def config_file():

@@ -13,8 +13,8 @@ actions:
       name: myindex
       extra_settings:
         settings:
-          number_of_shards: 2
-          number_of_replicas: 1
+          number_of_shards: 1
+          number_of_replicas: 0
       timeout_override:
       continue_if_exception: False
-      disable_action: True
+      disable_action: False
