@@ -111,13 +111,13 @@ try:
         }
 
     setup(
-        name = "elasticsearch-curator",
+        name = "curator-opensearch",
         version = get_version(),
-        author = "Elastic",
-        author_email = "info@elastic.co",
+        author = "Uzhinsky",
+        author_email = "lspci@mail.ru",
         description = "Tending your Elasticsearch indices",
         long_description=fread('README.rst'),
-        url = "http://github.com/elastic/curator",
+        url = "https://github.com/uzhinskiy/curator-opensearch",
         download_url = "https://github.com/elastic/curator/tarball/v" + get_version(),
         license = "Apache License, Version 2.0",
         install_requires = get_install_requires(),
@@ -150,13 +150,13 @@ try:
     ### end cx_Freeze ###
 except ImportError:
     setup(
-        name = "elasticsearch-curator",
+        name = "curator-opensearch",
         version = get_version(),
-        author = "Elastic",
-        author_email = "info@elastic.co",
+        author = "Uzhinsky",
+        author_email = "lspci@mail.ru",
         description = "Tending your Elasticsearch indices",
         long_description=fread('README.rst'),
-        url = "http://github.com/elastic/curator",
+        url = "https://github.com/uzhinskiy/curator-opensearch",
         download_url = "https://github.com/elastic/curator/tarball/v" + get_version(),
         license = "Apache License, Version 2.0",
         install_requires = get_install_requires(),
