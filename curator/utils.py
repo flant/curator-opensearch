@@ -137,7 +137,7 @@ def verify_client_object(test):
     if str(type(test)) == "<class 'mock.Mock'>" or \
         str(type(test)) == "<class 'mock.mock.Mock'>":
         pass
-    elif not isinstance(test, opensearchpy.Opensearch):
+    elif not isinstance(test, opensearchpy.OpenSearch):
         raise TypeError(
             'Not a client object. Type: {0}'.format(type(test))
         )
@@ -723,7 +723,7 @@ def check_master(client, master_only=False):
     Check if connected client is the elected master node of the cluster.
     If not, cleanly exit with a log message.
 
-    :arg client: An :class:`opensearchpy.Opensearch` client object
+    :arg client: An :class:`opensearchpy.OpenSearch` client object
     :rtype: None
     """
     if master_only and not is_master_node(client):
