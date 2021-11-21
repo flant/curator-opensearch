@@ -834,6 +834,8 @@ def process_ssl_args(data):
     data['use_ssl'] = False if 'use_ssl' not in data else data['use_ssl']
     data['ssl_no_validate'] = False if 'ssl_no_validate' not in data \
         else data['ssl_no_validate']
+    data['ssl_show_warn'] = False if 'ssl_show_warn' not in data \
+        else data['ssl_show_warn']
     data['certificate'] = False if 'certificate' not in data \
         else data['certificate']
     data['client_cert'] = False if 'client_cert' not in data \
@@ -1011,6 +1013,8 @@ def get_client(**kwargs):
         chain.  This is an insecure option and you will see warnings in the
         log output.
     :type ssl_no_validate: bool
+    :arg ssl_show_warn: If `True`, all SSL warnings will shown.
+    :type ssl_show_warn: bool
     :arg username: HTTP basic authentication username. Ignored if ``http_auth`` is set.
     :type username: str
     :arg password: HTTP basic authentication password. Ignored if ``http_auth`` is set.

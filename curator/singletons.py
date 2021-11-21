@@ -43,6 +43,10 @@ from curator._version import __version__
     callback=false_to_none, help='Do not validate SSL certificate'
 )
 @click.option(
+    '--ssl-show-warn', is_flag=True,
+    callback=false_to_none, help='Show SSL warnings'
+)
+@click.option(
     '--http_auth',
     help='Use Basic Authentication ex: user:pass -- DEPRECATED. Use username and password.'
 )
@@ -66,7 +70,7 @@ from curator._version import __version__
 @click.pass_context
 def cli(
         ctx, config, host, url_prefix, port, use_ssl, certificate, client_cert, client_key,
-        ssl_no_validate, http_auth, username, password, apikey_auth, timeout, master_only, dry_run, loglevel,
+        ssl_no_validate, ssl_show_warn, http_auth, username, password, apikey_auth, timeout, master_only, dry_run, loglevel,
         logfile, logformat
     ):
     """CLI input"""
