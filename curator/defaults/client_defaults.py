@@ -20,6 +20,7 @@ def config_client():
         Optional('aws_sign_request', default=False): Boolean(),
         Optional('aws_region'): Any(None, *string_types),
         Optional('ssl_no_validate', default=False): Boolean(),
+        Optional('ssl_show_warn', default=False): Boolean(),
         Optional('username', default=None): Any(None, *string_types),
         Optional('password', default=None): Any(None, *string_types),
         Optional('http_auth', default=None): Any(None, *string_types),
