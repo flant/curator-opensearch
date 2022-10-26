@@ -1206,7 +1206,7 @@ def find_snapshot_tasks(client):
                 retval = True
     return retval
 
-def safe_to_snap(client, repository=None, retry_interval=120, retry_count=3):
+def safe_to_snap(client, repository=None, retry_interval=120, retry_count=2):
     """
     Ensure there are no snapshots in progress.  Pause and retry accordingly
 
@@ -1219,7 +1219,7 @@ def safe_to_snap(client, repository=None, retry_interval=120, retry_count=3):
     """
     if not repository:
         raise exceptions.MissingArgument('No value for "repository" provided')
-    for count in range(1, retry_count+1):
+    for count in range(1, retry_count+2):
         in_progress = snapshot_in_progress(
             client, repository=repository
         )

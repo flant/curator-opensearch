@@ -227,7 +227,7 @@ def requests_per_second():
     return {Optional('requests_per_second', default=-1): Any(-1, Coerce(int), None)}
 
 def retry_count():
-    return {Optional('retry_count', default=3): All(Coerce(int), Range(min=0, max=100))}
+    return {Optional('retry_count', default=2): All(Coerce(int), Range(min=0, max=100))}
 
 def retry_interval():
     return {Optional('retry_interval', default=120): All(Coerce(int), Range(min=1, max=600))}
