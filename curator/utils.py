@@ -101,7 +101,7 @@ def rollable_alias(client, alias):
     # number, and 'value of "alias" here' reflects the value of the passed
     # parameter, except in versions 6.5.0+ where the ``is_write_index`` setting
     # makes it possible to have more than one index associated with a rollover index
-    if get_version(client) >= (6, 5, 0):
+    if get_version(client) >= (1, 0, 0):
         for idx in response:
             if 'is_write_index' in response[idx]['aliases'][alias]:
                 if response[idx]['aliases'][alias]['is_write_index']:

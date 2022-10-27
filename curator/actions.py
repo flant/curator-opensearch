@@ -1051,7 +1051,7 @@ class Rollover(object):
         """
         if 'max_size' in conditions:
             version = utils.get_version(self.client)
-            if version < (6, 1, 0):
+            if version < (1, 0, 0):
                 raise exceptions.ConfigurationError(
                     'Your version of elasticsearch ({0}) does not support '
                     'the max_size rollover condition. It is only supported '
@@ -1462,7 +1462,7 @@ class Reindex(object):
             'slices': self.slices
         }
         version = utils.get_version(self.client)
-        if version < (5, 1, 0):
+        if version < (1, 0, 0):
             self.loggit.info(
                 'Your version of elasticsearch ({0}) does not support '
                 'sliced scroll for reindex, so that setting will not be '
@@ -2103,7 +2103,7 @@ class Shrink(object):
         if extra_settings:
             self._merge_extra_settings(extra_settings)
 
-        if utils.get_version(self.client) >= (6, 1, 0):
+        if utils.get_version(self.client) >= (1, 0, 0):
             self._merge_extra_settings({
                 'settings': {
                     'index.routing.allocation.require._name': None,
