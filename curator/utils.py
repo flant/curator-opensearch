@@ -1050,7 +1050,7 @@ def get_client(**kwargs):
     kwargs = process_auth_args(kwargs)
     kwargs = process_apikey_auth_args(kwargs)
 
-    LOGGER.info("kwargs = {0}".format(kwargs))
+    LOGGER.info("kwargs = {0}".format(password_filter_special(kwargs.copy())))
     fail = False
     try:
         # Creating the class object should be okay
@@ -2114,3 +2114,18 @@ def get_write_index(client, alias):
     else:
         # There's only one, so this is it
         return list(response.keys())[0]
+
+def password_filter_special(data):
+    """
+    Return a deepcopy of the dictionary with any password fields hidden
+    """
+    def iterdict(mydict):
+        for key, value in mydict.items():
+            if isinstance(value, dict):
+                iterdict(value)
+            elif key == "http_auth":
+                mydict.update({"http_auth": (value[0],"REDACTED")})
+            elif key == "password":
+                mydict.update({"password": "REDACTED"})
+        return mydict
+    return iterdict(data)
