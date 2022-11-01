@@ -53,6 +53,8 @@ def password_filter(data):
         for key, value in mydict.items():
             if isinstance(value, dict):
                 iterdict(value)
+            elif key == "http_auth":
+                mydict.update({"http_auth": (value[0],"REDACTED")})
             elif key == "password":
                 mydict.update({"password": "REDACTED"})
         return mydict
