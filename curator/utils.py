@@ -2119,6 +2119,7 @@ def password_filter_special(data):
     """
     Return a deepcopy of the dictionary with any password fields hidden
     """
+    print(data)
     def iterdict(mydict):
         for key, value in mydict.items():
             if isinstance(value, dict):
