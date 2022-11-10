@@ -2124,7 +2124,10 @@ def password_filter_special(data):
             if isinstance(value, dict):
                 iterdict(value)
             elif key == "http_auth":
-                mydict.update({"http_auth": (value[0],"REDACTED")})
+                if value is None:
+                  mydict.update({"http_auth": None})
+                else: 
+                  mydict.update({"http_auth": "REDACTED"})
             elif key == "password":
                 mydict.update({"password": "REDACTED"})
         return mydict
