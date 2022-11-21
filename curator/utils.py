@@ -2128,7 +2128,7 @@ def password_filter_special(data):
                   mydict.update({"http_auth": None})
                 else: 
                   mydict.update({"http_auth": "REDACTED"})
-            elif key == "password":
-                mydict.update({"password": "REDACTED"})
+            elif key in ["password", "aws_token", "aws_secret_key", "aws_key"]:
+                mydict.update({key: "REDACTED"})
         return mydict
     return iterdict(data)
