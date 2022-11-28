@@ -1,0 +1,10 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "curator.fullname" . }}-config
+  labels:
+    {{- include "curator.labels" . | nindent 4 }}
+data:
+  action_file.yaml: {{ required "A valid .Values.config.actions_yaml entry is required!" (toYaml .Values.config.actions_yaml | indent 2) }}
+  config.yaml: {{ required "A valid .Values.config.config_yaml entry is required!" (toYaml .Values.config.config_yaml | indent 2) }}

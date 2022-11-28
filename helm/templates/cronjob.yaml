@@ -1,0 +1,95 @@
+---
+apiVersion: {{ template "cronjob.apiVersion" . }}
+kind: CronJob
+metadata:
+  name: {{ include "curator.fullname" . }}
+  labels:
+    {{- include "curator.labels" . | nindent 4 }}
+  {{- if .Values.cronjob.annotations }}
+  annotations:
+    {{ toYaml .Values.cronjob.annotations | nindent 4 }}
+  {{- end }}
+spec:
+  schedule: "{{ .Values.cronjob.schedule }}"
+  {{- with .Values.cronjob.concurrencyPolicy }}
+  concurrencyPolicy: {{ . }}
+  {{- end }}
+  {{- with .Values.cronjob.failedJobsHistoryLimit }}
+  failedJobsHistoryLimit: {{ . }}
+  {{- end }}
+  {{- with .Values.cronjob.successfulJobsHistoryLimit }}
+  successfulJobsHistoryLimit: {{ . }}
+  {{- end }}
+  {{- with .Values.cronjob.startingDeadlineSeconds }}
+  startingDeadlineSeconds: {{ . }}
+  {{- end }}
+  jobTemplate:
+    metadata:
+      labels:
+        {{- include "curator.labels" . | nindent 8 }}
+    spec:
+      template:
+        metadata:
+          labels:
+            {{- include "curator.labels" . | nindent 12 }}
+        spec:
+          volumes:
+            - name: config-volume
+              configMap:
+                name: {{ include "curator.fullname" . }}-config
+          restartPolicy: {{ .Values.cronjob.jobRestartPolicy }}
+          {{- with .Values.imagePullSecrets }}
+          imagePullSecrets:
+            - name: {{ . }}
+          {{- end }}
+          {{- if .Values.extraInitContainers }}
+          initContainers:
+            {{- range $key, $value := .Values.extraInitContainers }}
+            - name: "{{ $key }}"
+              {{ toYaml $value | nindent 14 }}
+            {{- end }}
+          {{- end }}
+          {{- if .Values.serviceAccount.create }}
+          serviceAccountName: {{ include "curator.serviceAccountName" . }}
+          {{- end }}
+          containers:
+            - name: curator
+              image: "{{ .Values.image.repository }}:{{ default .Chart.AppVersion .Values.image.tag }}"
+              imagePullPolicy: {{ .Values.image.pullPolicy }}
+              volumeMounts:
+                - name: config-volume
+                  mountPath: /etc/es-curator
+              {{ if .Values.command }}
+              command:
+                {{- toYaml .Values.command | nindent 16 }}
+              {{- end }}
+              {{- if .Values.dryrun }}
+              args: [ "--dry-run", "--config", "/etc/es-curator/config.yaml", "/etc/es-curator/action_file.yaml" ]
+              {{- else }}
+              args: [ "--config", "/etc/es-curator/config.yaml", "/etc/es-curator/action_file.yaml" ]
+              {{- end }}
+              {{- if .Values.env }}
+              env:
+                {{- range $key,$value := .Values.env }}
+                - name: {{ $key | upper | quote}}
+                  value: {{ $value | quote}}
+                {{- end }}
+              {{- end }}
+              resources:
+                {{- toYaml .Values.resources | nindent 16 }}
+          {{- with .Values.nodeSelector }}
+          nodeSelector:
+            {{ toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.affinity }}
+          affinity:
+            {{ toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.tolerations }}
+          tolerations:
+            {{ toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.securityContext }}
+          securityContext:
+            {{ toYaml . | nindent 12 }}
+          {{- end }}

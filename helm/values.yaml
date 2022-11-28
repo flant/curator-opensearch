@@ -1,0 +1,101 @@
+# Service configuration
+cronjob:
+  # At 01:00 every day
+  schedule: "0 1 * * *"
+  annotations: {}
+  labels: {}
+  concurrencyPolicy: ""
+  failedJobsHistoryLimit: ""
+  successfulJobsHistoryLimit: ""
+  jobRestartPolicy: Never
+  startingDeadlineSeconds: ""
+config:
+  actions_yaml: ""
+    # ---
+    # actions:
+    #   1:
+    #     action: delete_indices
+    #     description: "Clean up ES by deleting old indices"
+    #     options:
+    #       timeout_override:
+    #       continue_if_exception: False
+    #       disable_action: False
+    #       ignore_empty_list: True
+    #     filters:
+    #     - filtertype: age
+    #       source: name
+    #       direction: older
+    #       timestring: '%Y.%m.%d'
+    #       unit: days
+    #       unit_count: 7
+    #       field:
+    #       stats_result:
+    #       epoch:
+    #       exclude: False
+  # Having config_yaml WILL override the other config
+  config_yaml: ""
+    # ---
+    # client:
+    #   hosts:
+    #     - CHANGEME.host
+    #   port: 9200
+    #   # url_prefix:
+    #   # use_ssl: True
+    #   # certificate:
+    #   # client_cert:
+    #   # client_key:
+    #   # ssl_no_validate: True
+    #   # http_auth:
+    #   # timeout: 30
+    #   # master_only: False
+    # # logging:
+    # #   loglevel: INFO
+    # #   logfile:
+    # #   logformat: default
+    # #   blacklist: ['elasticsearch', 'urllib3']
+dryrun: false
+command: ["/curator/curator"]
+env: {}
+envFromSecrets: {}
+extraInitContainers: {}
+# Default values for helm.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+image:
+  repository: ghcr.io/naviteq/curator-opensearch
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext:
+  runAsUser: 16  # run as cron user instead of root
+
+resources:
+  requests:
+    cpu: 200m
+    memory: 512Mi
+  limits:
+    cpu: 500m
+    memory: 512Mi
+
+nodeSelector: {}
+tolerations: []
+affinity: {}
