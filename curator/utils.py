@@ -658,7 +658,8 @@ def get_indices(client):
     """
     try:
         indices = list(
-            client.indices.get_settings(index='_all', params={'expand_wildcards': 'open,closed'})
+            # TODO: Replace getenv with more native way
+            client.indices.get_settings(index='_all', params={'expand_wildcards': os.getenv("OS_GET_INDICES", 'open,closed')})
         )
         version_number = get_version(client)
         LOGGER.debug(
