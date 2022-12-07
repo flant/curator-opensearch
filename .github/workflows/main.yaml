@@ -22,7 +22,6 @@ jobs:
     needs: [helm-release]
 
   release:
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo "placeholder"
+    uses: naviteq/github-actions/.github/workflows/create-release.yaml@main
+    secrets: inherit
     needs: [docker, helm]
