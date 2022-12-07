@@ -7,9 +7,15 @@ on:
 
 jobs:
   docker:
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo "placeholder"
+    uses: naviteq/github-actions/.github/workflows/oracle-docker-build.yaml@main
+    permissions:
+      packages: write
+    with:
+      OCI_REGISTRY: ghcr.io
+      OCI_IMAGE: ${{ github.repository }}
+    secrets:
+      OCI_USERNAME: ${{ github.actor }}
+      OCI_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   helm:
     runs-on: ubuntu-latest

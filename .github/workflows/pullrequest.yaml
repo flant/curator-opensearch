@@ -12,9 +12,13 @@ on:
       - main
 jobs:
   docker:
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo "placeholder"
+    uses: naviteq/github-actions/.github/workflows/oci-docker-build.yaml@25c677035c68570a775bfeee4fb32f806a428ab5
+    with:
+      OCI_REGISTRY: ghcr.io
+      OCI_IMAGE: ${{ github.repository }}
+    secrets:
+      OCI_USERNAME: ${{ github.actor }}
+      OCI_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   helm:
     runs-on: ubuntu-latest
