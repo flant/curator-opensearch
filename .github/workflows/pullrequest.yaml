@@ -1,0 +1,22 @@
+---
+
+name: Pull request code validation and building (Main branch)
+on:
+  pull_request:
+    types:
+      - opened
+      - edited
+      - synchronize
+      - reopened
+    branches:
+      - main
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "placeholder"
+
+  helm:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "placeholder"

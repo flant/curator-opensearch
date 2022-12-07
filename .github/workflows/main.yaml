@@ -1,0 +1,28 @@
+---
+
+name: CI (Main branch)
+on:
+  push:
+    branches: [main]
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "placeholder"
+
+  helm-release:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "placeholder"
+
+  helm:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "placeholder"
+    needs: [helm-release]
+
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "placeholder"
+    needs: [docker, helm]
