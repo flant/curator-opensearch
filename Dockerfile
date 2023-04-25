@@ -1,4 +1,4 @@
-FROM python:3.9.13-alpine3.16 as builder
+FROM python:3.11-alpine3.17 as builder
 
 # Add the community repo for access to patchelf binary package
 RUN echo 'https://dl-cdn.alpinelinux.org/alpine/v3.16/community/' >> /etc/apk/repositories
@@ -12,9 +12,9 @@ RUN ln -s /lib /lib64
 RUN pip3 install -r requirements.txt
 RUN python3 setup.py build_exe
 
-FROM alpine:3.16
+FROM alpine:3.17
 RUN apk --no-cache upgrade && apk --no-cache add openssl-dev expat
-COPY --from=builder build/exe.linux-x86_64-3.9 /curator/
+COPY --from=builder build/exe.linux-x86_64-3.11 /curator/
 RUN mkdir /.curator
 
 USER nobody:nobody
