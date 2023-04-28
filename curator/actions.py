@@ -2,6 +2,7 @@
 import logging
 import re
 import time
+import fnmatch
 from copy import deepcopy
 from datetime import datetime
 from opensearchpy.exceptions import ConflictError, RequestError
@@ -1935,12 +1936,13 @@ class Restore(object):
         found_count = 0
         missing = []
         for index in self.expected_output:
-            if index in all_indices:
+            for item in all_indices:
+              if fnmatch.fnmatch(item, index):
                 found_count += 1
                 self.loggit.info('Found restored index {0}'.format(index))
-            else:
+              else:
                 missing.append(index)
-        if found_count == len(self.expected_output):
+        if found_count >= len(self.expected_output):
             self.loggit.info('All indices appear to have been restored.')
         else:
             msg = (
