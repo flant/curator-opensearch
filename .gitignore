@@ -129,3 +129,4 @@ dmypy.json
 .pyre/
 
 .howtobuild
+examples/restore-s3.yml
