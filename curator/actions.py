@@ -1939,7 +1939,7 @@ class Restore(object):
             for item in all_indices:
               if fnmatch.fnmatch(item, index):
                 found_count += 1
-                self.loggit.info('Found restored index {0}'.format(index))
+                self.loggit.info('Found restored index {0}'.format(item))
               else:
                 missing.append(index)
         if found_count >= len(self.expected_output):
