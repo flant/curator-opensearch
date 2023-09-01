@@ -445,7 +445,7 @@ description: "Delete selected snapshots from 'repository'"
 options:
   repository: ...
   retry_interval: 120
-  retry_count: 3
+  retry_count: 2
 filters:
 - filtertype: ...
 -------------
