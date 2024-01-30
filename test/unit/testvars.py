@@ -176,11 +176,7 @@ snap_body       = {
                   }
 verified_nodes  = {'nodes': {'nodeid1': {'name': 'node1'}, 'nodeid2': {'name': 'node2'}}}
 synced_pass     = {
-                    "_shards":{"total":1,"successful":1,"failed":0},
-                    "index_name":{
-                        "total":1,"successful":1,"failed":0,
-                        "failures":[],
-                    }
+                    "_shards":{"total":1,"successful":1,"failed":0}
                   }
 synced_fail     = {
                     "_shards":{"total":1,"successful":0,"failed":1},
