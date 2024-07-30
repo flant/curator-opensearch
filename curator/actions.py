@@ -1287,7 +1287,7 @@ class Reindex(object):
         self.slices = slices
         #: Instance variable.
         #: Internal reference to `timeout`, and add "s" for seconds.
-        self.timeout = '{0}s'.format(timeout)
+        self.timeout = timeout
         #: Instance variable.
         #: Internal reference to `wait_for_active_shards`
         self.wait_for_active_shards = wait_for_active_shards

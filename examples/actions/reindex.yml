@@ -1,0 +1,27 @@
+---
+actions:
+  1:
+    description: "Reindex from remote cluster"
+    action: reindex
+    options:
+      wait_interval: 9
+      max_wait: -1
+      timeout: 70
+      request_body:
+        source:
+          remote:
+            host: https://es01:9200
+            username: elastic
+            password: elastic
+          index: index-2024.07.30
+        dest:
+          index: index-2024.07.30
+      remote_ssl_no_validate: True
+#      remote_filters:
+#      - filtertype: age
+#        source: creation_date
+#        direction: older
+#        unit: days
+#        unit_count: 150
+    filters:
+    - filtertype: none
