@@ -333,7 +333,7 @@ class Close(object):
                         )
                 if not self.skip_flush:
                     try:
-                        self.client.indices.flush_synced(index=lst_as_csv, ignore_unavailable=True)
+                        self.client.indices.flush(index=lst_as_csv, ignore_unavailable=True, force=True)
                     except ConflictError as err:
                         if not self.ignore_sync_failures:
                             raise ConflictError(err.status_code, err.error, err.info)
