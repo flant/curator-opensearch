@@ -1196,15 +1196,14 @@ def find_snapshot_tasks(client):
     :arg client: An :class:`opensearchpy.Opensearch` client object
     :rtype: bool
     """
-    retval = False
     tasklist = client.tasks.list()
     for node in tasklist['nodes']:
         for task in tasklist['nodes'][node]['tasks']:
             activity = tasklist['nodes'][node]['tasks'][task]['action']
             if 'snapshot' in activity:
                 LOGGER.debug('Snapshot activity detected: {0}'.format(activity))
-                retval = True
-    return retval
+                return tasklist['nodes'][node]['tasks'][task]
+    return False
 
 def safe_to_snap(client, repository=None, retry_interval=120, retry_count=3):
     """
@@ -1229,7 +1228,8 @@ def safe_to_snap(client, repository=None, retry_interval=120, retry_count=3):
                 LOGGER.info(
                     'Snapshot already in progress: {0}'.format(in_progress))
             elif ongoing_task:
-                LOGGER.info('Snapshot activity detected in Tasks API')
+                LOGGER.info(
+                    'Snapshot activity detected in Tasks API: {0}'.format(ongoing_task))
             LOGGER.info(
                 'Pausing {0} seconds before retrying...'.format(retry_interval))
             time.sleep(retry_interval)

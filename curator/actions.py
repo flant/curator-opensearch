@@ -1189,7 +1189,7 @@ class DeleteSnapshots(object):
         ):
                 raise exceptions.FailedExecution(
                     'Unable to delete snapshot(s) because a snapshot is in '
-                    'state "IN_PROGRESS"')
+                    'state "IN_PROGRESS" or other snapshot activity was detected')
         try:
             for snap in self.snapshot_list.snapshots:
                 self.loggit.info('Deleting snapshot {0}...'.format(snap))
