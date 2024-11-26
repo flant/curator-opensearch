@@ -40,7 +40,7 @@ def delete_indices(ctx, ignore_empty_list, allow_ilm_indices, filter_list):
 #### Snapshots ####
 @click.command(context_settings=get_width())
 @click.option('--repository', type=str, required=True, help='Snapshot repository name')
-@click.option('--retry_count', type=int, help='Number of times to retry (max 3)')
+@click.option('--retry_count', type=int, help='Number of times to retry (max 100)')
 @click.option('--retry_interval', type=int, help='Time in seconds between retries')
 @click.option(
     '--ignore_empty_list',

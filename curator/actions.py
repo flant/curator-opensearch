@@ -1131,7 +1131,7 @@ class Rollover(object):
 
 class DeleteSnapshots(object):
     """Delete Snapshots Action Class"""
-    def __init__(self, slo, retry_interval=120, retry_count=3):
+    def __init__(self, slo, retry_interval=120, retry_count=2):
         """
         :arg slo: A :class:`curator.snapshotlist.SnapshotList` object
         :arg retry_interval: Number of seconds to delay betwen retries. Default:
